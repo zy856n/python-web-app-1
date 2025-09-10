@@ -71,7 +71,7 @@ def signup():
                 db.session.commit()
                 
                 # login mechanism, log in user as they sign up
-                login_user(user, remember=True)
+                login_user(new_user, remember=True)
                 
                 flash("Account created!", category="success")
                 # one could just use /, but using blueprint name / fuction name in case if you change the url for home function, don't have to change this url again
