@@ -8,6 +8,11 @@ from flask_login import login_user, logout_user, current_user, login_required
 
 auth = Blueprint("auth", __name__)
 
+@auth.route("/debug")
+def debug():
+    from main import app
+    return app.config['SQLALCHEMY_DATABASE_URI']
+
 @auth.route("/login", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
