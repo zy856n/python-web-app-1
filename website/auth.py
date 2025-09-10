@@ -29,6 +29,8 @@ def login():
                 
                 # login mechanism, log in user
                 login_user(user, remember=True)
+                
+                return redirect(url_for("views.home"))
 
             else:
                 flash("Incorrect password.", category="error")
