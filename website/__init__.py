@@ -7,7 +7,7 @@ from flask_login import LoginManager
 
 db = SQLAlchemy()
 
-BASE_DIR = path.dirname(path.dirname(path.abspath("main.py")))
+BASE_DIR = path.dirname(path.dirname(path.dirname(path.abspath(__file__))))
 SUB_DIR = "database/python-web-app-1"
 DB_NAME = "database.db"
 
