@@ -7,16 +7,15 @@ from flask_login import LoginManager
 
 db = SQLAlchemy()
 
+BASE_DIR = path.dirname(path.dirname(path.abspath("main.py")))
+SUB_DIR = "database/python-web-app-1"
 DB_NAME = "database.db"
 
 def create_app():
     app = Flask(__name__)
 
-    basedir = path.abspath("instance/")
-
+    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{path.join(BASE_DIR, SUB_DIR, DB_NAME)}"
     app.config["SECRET_KEY"] = "secret key"
-
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + path.join(basedir, DB_NAME)
 
     db.init_app(app)
 
@@ -28,7 +27,7 @@ def create_app():
 
     from .models import User, Note
 
-    if not path.exists("instance/" + DB_NAME):
+    if not path.exists(app.config['SQLALCHEMY_DATABASE_URI']):
         with app.app_context():
             db.create_all()
             print("Created database.")
