@@ -27,10 +27,13 @@ def create_app():
 
     from .models import User, Note
 
-    if not path.exists(app.config['SQLALCHEMY_DATABASE_URI']):
-        with app.app_context():
-            db.create_all()
-            print("Created database.")
+    try:  
+        if not path.exists(app.config['SQLALCHEMY_DATABASE_URI']):
+            with app.app_context():
+                db.create_all()
+                print("Created database.")
+    except:
+        print("Failed to initialize database.")
 
     # # login mechanism
     login_manager = LoginManager()
