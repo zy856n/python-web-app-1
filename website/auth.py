@@ -8,10 +8,12 @@ from flask_login import login_user, logout_user, current_user, login_required
 
 auth = Blueprint("auth", __name__)
 
+
 @auth.route("/debug")
 def debug():
     from main import app
     return app.config['SQLALCHEMY_DATABASE_URI']
+
 
 @auth.route("/login", methods=["POST", "GET"])
 def login():
@@ -40,6 +42,7 @@ def login():
     # login mechanism
     return render_template("login.html", user=current_user)
 
+
 @auth.route("/logout")
 @login_required
 def logout():
@@ -48,6 +51,7 @@ def logout():
     logout_user()
 
     return redirect(url_for("auth.login"))
+
 
 @auth.route("/signup", methods=["POST", "GET"])
 def signup():
