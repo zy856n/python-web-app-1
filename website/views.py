@@ -17,7 +17,7 @@ def home():
         if len(note) < 1:
             flash("Note is too short.", category="error")
         else:
-            new_note = Note(Data=note, UserId=current_user.Id)
+            new_note = Note(Data=note, UserID=current_user.ID)
             db.session.add(new_note)
             db.session.commit()
             flash("Note is added.", category="success")
@@ -27,10 +27,10 @@ def home():
 @views.route("/delete-note", methods=["POST"])
 def delete_note():
     note = json.loads(request.data)
-    noteId = note["noteId"]
-    note = Note.query.get(noteId)
+    noteID = note["noteID"]
+    note = Note.query.get(noteID)
     if note:
-        if note.UserId == current_user.Id:
+        if note.UserID == current_user.ID:
             db.session.delete(note)
             db.session.commit()
             return jsonify({})

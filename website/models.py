@@ -5,14 +5,14 @@ from sqlalchemy import Column, Integer, String
 
 class Note(db.Model):
     __tablename__ = "Note"
-    Id = db.Column(db.Integer, primary_key=True)
+    ID = db.Column(db.Integer, primary_key=True)
     Data = db.Column(db.String(100000))
     Date = db.Column(db.DateTime(timezone=True), default=func.now())
-    UserId = db.Column(db.Integer, db.ForeignKey("User.Id"))
+    UserID = db.Column(db.Integer, db.ForeignKey("User.ID"))
 
 class User(db.Model, UserMixin):
     __tablename__ = "User"
-    Id = db.Column(db.Integer, primary_key=True)
+    ID = db.Column(db.Integer, primary_key=True)
     Email = db.Column(db.String(150), unique=True)
     Password = db.Column(db.String(150))
     FirstName = db.Column(db.String(150))
@@ -23,4 +23,4 @@ class User(db.Model, UserMixin):
     # Flask-Login 需要每个用户对象都有一个唯一的 id 属性来标识用户。
     # 根据错误的提示，override get_id 即可 
     def get_id(self):
-        return self.Id
+        return self.ID

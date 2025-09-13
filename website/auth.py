@@ -6,6 +6,7 @@ from . import db
 # imports for login mechanism
 from flask_login import login_user, logout_user, current_user, login_required
 
+
 auth = Blueprint("auth", __name__)
 
 
@@ -22,8 +23,6 @@ def login():
         password = request.form.get("password")
 
         user = User.query.filter_by(Email=email).first()
-
-        print(user)
 
         if user:
             if check_password_hash(user.Password, password):
